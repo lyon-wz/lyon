@@ -1,0 +1,45 @@
+server:
+  port: 8764
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/security?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false
+    username: root
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+#缓存
+  cache:
+    type: redis
+  redis:
+    database: 0
+    host: 192.168.3.162
+    port: 6380
+    password:
+    pool:
+      max-active: 8
+      max-wait=: 1
+      max-idle: 8
+      min-idle: 0
+    timeout: 1200
+  activemq:
+    broker-url: tcp://192.168.3.162:61617
+    user: admin
+    password: admin
+
+jwt:
+  secret: JWTSecret
+  tokenHeader: Authorization
+  tokenPrefix: lyon-
+  expiration: 86400
+  antMatchers: /index,/login/**,/favicon.ico,/export/**
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  global-config:
+    db-config:
+      id-type: AUTO
+      field-strategy: NOT_EMPTY
+      db-type: MYSQL
+  configuration:
+    map-underscore-to-camel-case: true
+    call-setters-on-nulls: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
